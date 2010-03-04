@@ -1,0 +1,3 @@
+[submodule "vendor/PlagiarismDetector-PHP"]
+	path = vendor/PlagiarismDetector-PHP
+	url = http://github.com/SyrusAkbary/PlagiarismDetector-PHP.git
