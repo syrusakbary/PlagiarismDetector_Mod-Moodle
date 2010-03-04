@@ -236,8 +236,6 @@ $(document).ready(function() {
 	
 	$(".wrapper .content .rowcol").hover( function(){
 		var col = $(this).parent().find(".rowcol").index(this);
-		var a = $(this).find('a');
-		alert(a.attr('class'));
 		var row = $(".wrapper .content .row").index($(this).parent());
 		
 		$('.wrapper .left .row').eq(row).find('span').addClass('over');

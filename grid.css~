@@ -2,7 +2,6 @@
 .prewrapper {
 text-align:center;
 }
-
 .prewrapper button {
 padding:4px 6px;
 margin:5px;
@@ -22,46 +21,6 @@ display:block;
 margin:0 auto;
 font-size:14px;
 position:relative;max-width:600px;height:400px;padding:5px;
-}
-.wrapper .mapping {
-position:absolute;
-width:200px;
-left:100%;
-padding:4px;
-margin-left:10px;
-display:block;
-border:1px solid #999;
-background:#EEE;
-}
-.wrapper .mapping h4{
-position:absolute;
-top:-20px;
-margin:0;
-padding:0;
-right:0;
-}
-.wrapper .mapping .row a {
-border:2px solid rgba(0,0,0,0.3);
--webkit-border-radius:0px;
-text-indent:-5000px;
-width:24px!important;
-top:auto!important;
-left:auto!important;
-height:24px!important;
-display:inline-block;
-}
-.wrapper .mapping .row span {
-position:relative;
-top:5px;
-left:8px;
-font-size:16px;
-color:#666;
-}
-.wrapper .mapping .row span.over {
-color:#000;
-}
-.wrapper .mapping .row {
-padding:4px;
 }
 .wrapper .topr {
 clear:both;
@@ -138,68 +97,57 @@ border:2px solid rgba(0,0,0,0.3);
 text-indent:-5000px;
  -webkit-transition: all 100ms linear;
 }
-.wrapper .content .row .rowcol a.confirmed,
-.wrapper .mapping .row a.confirmed {
+.wrapper .content .row .rowcol a.confirmed {
 border:2px solid rgba(0,0,255,0.8);
 -webkit-box-shadow: 0px 0px 8px black;
 -moz-box-shadow: 0px 0px 8px black;
 }
-.wrapper .content .row .rowcol a.scale0 ,
-.wrapper .mapping .row a.scale0 {
+.wrapper .content .row .rowcol a.scale0 {
 top:35%;left:35%;
 width:30%;height:30%;
 background:#246D07;
 }
-.wrapper .content .row .rowcol a.scale1 ,
-.wrapper .mapping .row a.scale1 {
+.wrapper .content .row .rowcol a.scale1 {
 top:32.5%;left:32.5%;
 width:35%;height:35%;
 background:#5C7812;
 }
-.wrapper .content .row .rowcol a.scale2 ,
-.wrapper .mapping .row a.scale2 {
+.wrapper .content .row .rowcol a.scale2 {
 top:30%;left:30%;
 width:40%;height:40%;
 background:#7B7E18;
 }
-.wrapper .content .row .rowcol a.scale3 ,
-.wrapper .mapping .row a.scale3 {
+.wrapper .content .row .rowcol a.scale3 {
 top:27.5%;left:27.5%;
 width:45%;height:45%;
 background:#A98822;
 }
-.wrapper .content .row .rowcol a.scale4 ,
-.wrapper .mapping .row a.scale4 {
+.wrapper .content .row .rowcol a.scale4 {
 top:25%;left:25%;
 width:50%;height:50%;
 background:#D3902A;
 }
-.wrapper .content .row .rowcol a.scale5 ,
-.wrapper .mapping .row a.scale5 {
+.wrapper .content .row .rowcol a.scale5 {
 top:22.5%;left:22.5%;
 width:55%;height:55%;
 background:#EF8B2C;
 }
-.wrapper .content .row .rowcol a.scale6 ,
-.wrapper .mapping .row a.scale6 {
+.wrapper .content .row .rowcol a.scale6 {
 top:20%;left:20%;
 width:60%;height:60%;
 background:#E56420;
 }
-.wrapper .content .row .rowcol a.scale7 ,
-.wrapper .mapping .row a.scale7 {
+.wrapper .content .row .rowcol a.scale7 {
 top:15%;left:15%;
 width:70%;height:70%;
 background:#DC3E14;
 }
-.wrapper .content .row .rowcol a.scale8 ,
-.wrapper .mapping .row a.scale8 {
+.wrapper .content .row .rowcol a.scale8 {
 top:10%;left:10%;
 width:80%;height:80%;
 background:#D6270C;
 }
-.wrapper .content .row .rowcol a.scale9,
-.wrapper .mapping .row a.scale9 {
+.wrapper .content .row .rowcol a.scale9 {
 top:5%;left:5%;
 width:90%;height:90%;
 background:#CC0000;

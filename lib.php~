@@ -234,19 +234,7 @@ class plagiarismdetector_base {
 		}
 		echo '<div class="prewrapper">
 		<div class="wrapper">
-		<div class="mapping">
-		<h4>Leyenda</h4>
-		<div class="row"><a class="scale9">Scale</a><span>90%-100%</span></div>
-		<div class="row"><a class="scale8">Scale</a><span>80%-90%</span></div>
-		<div class="row"><a class="scale7">Scale</a><span>70%-80%</span></div>
-		<div class="row"><a class="scale6">Scale</a><span>60%-70%</span></div>
-		<div class="row"><a class="scale5">Scale</a><span>50%-60%</span></div>
-		<div class="row"><a class="scale4">Scale</a><span>40%-50%</span></div>
-		<div class="row"><a class="scale3">Scale</a><span>30%-40%</span></div>
-		<div class="row"><a class="scale2">Scale</a><span>20%-30%</span></div>
-		<div class="row"><a class="scale1">Scale</a><span>10%-20%</span></div>
-		<div class="row"><a class="scale0">Scale</a><span>0%-10%</span></div>
-		</div>
+
 		<div class="left">
 		<div style="position:relative;width:100%;">
 		'.implode('',$strrows).'
