@@ -235,7 +235,7 @@ class plagiarismdetector_base {
 		echo '<div class="prewrapper">
 		<div class="wrapper">
 		<div class="mapping">
-		<h4>Leyenda</h4>
+		<h4>'.get_string('legend','plagiarismdetector').'</h4>
 		<div class="row"><a class="scale9">Scale</a><span>90%-100%</span></div>
 		<div class="row"><a class="scale8">Scale</a><span>80%-90%</span></div>
 		<div class="row"><a class="scale7">Scale</a><span>70%-80%</span></div>
@@ -308,9 +308,36 @@ class plagiarismdetector_base {
 		echo get_string('initialization','plagiarismdetector');
 		$judger = $this->plagiarismDetector->plugin($this->plagiarism->plugin);
 		delete_records('plagiarismdetector_similarities', 'plagiarismid',$this->plagiarism->id);
-		$dir = $this->cfg->dataroot.'/'. $this->course->id.'/moddata/assignment/'.$this->assignment->id;
-		echo "<br>[Dir: {$dir}]<br>";
-		$results = $judger->compareDir($dir)->getResults();
+		$assignmentdir = $this->cfg->dataroot.'/'. $this->course->id.'/moddata/assignment/'.$this->assignment->id;
+		$plagiarismdetectordir = $this->cfg->dataroot.'/'. $this->course->id.'/moddata/plagiarismdetector/'.$this->assignment->id;
+		echo "<br>[Assignment directory: {$assignmentdir}]<br>";
+		if ($dh = opendir($assignmentdir)) {
+			while (($file = readdir($dh)) !== false) {
+				$adir = $assignmentdir."/".$file;
+				$pdir = $plagiarismdetectordir."/".$file;
+				if ($file != "." && $file != ".." && is_dir($adir)) {
+					echo "Creating directory for user {$file}:";
+					mkdir ($pdir,NULL,true);
+					//echo 'cp '.$adir.'/* '.$pdir.'/';
+					//$msg = shell_exec('cp '.$adir.'/* '.$pdir.'/;');
+					//echo $msg;
+					//echo "filename: $file : filetype: " . filetype($dir . $file) . "\n";
+					//for i in *.zip; do unzip $i; done
+					echo "&nbsp;&nbsp;Copying & Unpacking files...";
+					flush();
+					ob_flush();
+					/*$msg2 = */shell_exec('cp '.$adir.'/* '.$pdir.'/; cd '.$pdir.'; for i in *.zip; do unzip $i; rm $i; done; for i in *.tar.gz; do tar -xzvf $i; rm $i; done;');
+					echo "FINISHED<br>";
+					flush();
+					ob_flush();
+					//echo $msg.$msg2;
+					//for i in *.tar.gz; do tar -xzvf $i; done
+				}
+			}
+			closedir($dh);
+		}
+		echo "<br>[PlagiarismDetector directory: {$plagiarismdetectordir}]<br>";
+		$results = $judger->compareDir($plagiarismdetectordir)->getResults();
 		foreach ($results as $result) {
 			$data_similarity = new stdClass();
 			$data_similarity->user1 = (string)$result['users'][0];
