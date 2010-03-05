@@ -309,35 +309,42 @@ class plagiarismdetector_base {
 		$judger = $this->plagiarismDetector->plugin($this->plagiarism->plugin);
 		delete_records('plagiarismdetector_similarities', 'plagiarismid',$this->plagiarism->id);
 		$assignmentdir = $this->cfg->dataroot.'/'. $this->course->id.'/moddata/assignment/'.$this->assignment->id;
-		$plagiarismdetectordir = $this->cfg->dataroot.'/'. $this->course->id.'/moddata/plagiarismdetector/'.$this->assignment->id;
-		echo "<br>[Assignment directory: {$assignmentdir}]<br>";
-		if ($dh = opendir($assignmentdir)) {
-			while (($file = readdir($dh)) !== false) {
-				$adir = $assignmentdir."/".$file;
-				$pdir = $plagiarismdetectordir."/".$file;
-				if ($file != "." && $file != ".." && is_dir($adir)) {
-					echo "Creating directory for user {$file}:";
-					mkdir ($pdir,NULL,true);
-					//echo 'cp '.$adir.'/* '.$pdir.'/';
-					//$msg = shell_exec('cp '.$adir.'/* '.$pdir.'/;');
-					//echo $msg;
-					//echo "filename: $file : filetype: " . filetype($dir . $file) . "\n";
-					//for i in *.zip; do unzip $i; done
-					echo "&nbsp;&nbsp;Copying & Unpacking files...";
-					flush();
-					ob_flush();
-					/*$msg2 = */shell_exec('cp '.$adir.'/* '.$pdir.'/; cd '.$pdir.'; for i in *.zip; do unzip $i; rm $i; done; for i in *.tar.gz; do tar -xzvf $i; rm $i; done;');
-					echo "FINISHED<br>";
-					flush();
-					ob_flush();
-					//echo $msg.$msg2;
-					//for i in *.tar.gz; do tar -xzvf $i; done
+		
+		if ($this->cfg->plagiarismdetector_enableunpack) {
+			$plagiarismdetectordir = $this->cfg->dataroot.'/'. $this->course->id.'/moddata/plagiarismdetector/'.$this->assignment->id;
+			echo "<br>[PlagiarismDetector directory: {$plagiarismdetectordir}]<br>";
+			if ($dh = opendir($assignmentdir)) {
+				while (($file = readdir($dh)) !== false) {
+					$adir = $assignmentdir."/".$file;
+					$pdir = $plagiarismdetectordir."/".$file;
+					if ($file != "." && $file != ".." && is_dir($adir)) {
+						echo "Creating directory for user {$file}:";
+						mkdir ($pdir,NULL,true);
+						//echo 'cp '.$adir.'/* '.$pdir.'/';
+						//$msg = shell_exec('cp '.$adir.'/* '.$pdir.'/;');
+						//echo $msg;
+						//echo "filename: $file : filetype: " . filetype($dir . $file) . "\n";
+						//for i in *.zip; do unzip $i; done
+						echo "&nbsp;&nbsp;Copying & Unpacking files...";
+						flush();
+						ob_flush();
+						/*$msg2 = */shell_exec('cp '.$adir.'/* '.$pdir.'/; cd '.$pdir.'; for i in *.zip; do unzip $i; rm $i; done; for i in *.tar.gz; do tar -xzvf $i; rm $i; done;');
+						echo "FINISHED<br>";
+						flush();
+						ob_flush();
+						//echo $msg.$msg2;
+						//for i in *.tar.gz; do tar -xzvf $i; done
+					}
 				}
+				closedir($dh);
 			}
-			closedir($dh);
+			$finaldir = $plagiarismdetectordir;
 		}
-		echo "<br>[PlagiarismDetector directory: {$plagiarismdetectordir}]<br>";
-		$results = $judger->compareDir($plagiarismdetectordir)->getResults();
+		else {
+			echo "<br>[Assignment directory: {$assignmentdir}]<br>";
+			$finaldir = $assignmentdir;
+		}
+		$results = $judger->compareDir($finaldir)->getResults();
 		foreach ($results as $result) {
 			$data_similarity = new stdClass();
 			$data_similarity->user1 = (string)$result['users'][0];

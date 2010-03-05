@@ -19,4 +19,5 @@ if (file_exists($CFG->plagiarismdetector_source)) {
 }
 $settings->add(new admin_setting_configcheckbox('plagiarismdetector_enableautonotify', get_string('enableautonotify', 'plagiarismdetector'), get_string('configautonotify', 'plagiarismdetector'), 1));
 
+$settings->add(new admin_setting_configcheckbox('plagiarismdetector_enableunpack', get_string('enableunpack', 'plagiarismdetector'), get_string('configunpack', 'plagiarismdetector'), 1));
 //$settings->add(new admin_setting_heading('plagiarismdetector_ac_heading', get_string('pluginac', 'plagiarismdetector')));
