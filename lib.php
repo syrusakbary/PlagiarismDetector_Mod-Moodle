@@ -421,8 +421,9 @@ class plagiarismdetector_base {
 		$allPlagiarisms = $this->getPlagiarisms($this->assignment->id);
 		foreach ($allPlagiarisms as $plag) {
 			$actions = array();
-			$actions[] = "<a title=\"".get_string('edit')."\" href=\"{$this->cfg->wwwroot}/mod/plagiarismdetector/view.php?id={$plag->id}&action=edit\"><img src=\"{$this->cfg->pixpath}/t/edit.gif\" class=\"iconsmall\" alt=\"".get_string('edit')."\" /></a>\n";
-			$actions[] = "<a title=\"".get_string('delete')."\" href=\"{$this->cfg->wwwroot}/mod/plagiarismdetector/view.php?id={$plag->id}&action=delete\"><img src=\"{$this->cfg->pixpath}/t/delete.gif\" class=\"iconsmall\" alt=\"".get_string('delete')."\" /></a>\n";
+			$actions[] = "<a title=\"".get_string('detect','plagiarismdetector')."\" href=\"{$this->cfg->wwwroot}/mod/plagiarismdetector/detect.php?id={$plag->id}\"><img src=\"{$this->cfg->wwwroot}/mod/plagiarismdetector/t/detect.gif\" class=\"iconsmall\" alt=\"".get_string('detect','plagiarismdetector')."\" /></a>\n";
+			$actions[] = "<a title=\"".get_string('edit')."\" href=\"{$this->cfg->wwwroot}/mod/plagiarismdetector/edit.php?id={$plag->id}\"><img src=\"{$this->cfg->pixpath}/t/edit.gif\" class=\"iconsmall\" alt=\"".get_string('edit')."\" /></a>\n";
+			$actions[] = "<a title=\"".get_string('delete')."\" href=\"{$this->cfg->wwwroot}/mod/plagiarismdetector/delete.php?id={$plag->id}\"><img src=\"{$this->cfg->pixpath}/t/delete.gif\" class=\"iconsmall\" alt=\"".get_string('delete')."\" /></a>\n";
 			$tot = $this->totalPlagiarismsSimilarities($plag->id);
 			
 			$table->data[] = array(
