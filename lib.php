@@ -245,34 +245,34 @@ class plagiarismdetector_base {
 		<a href="#" class="level9">90-100%</a>90-100%
 		</td><tr>
 		<tr><td>
-		<a href="#" class="level8">asas</a>80-90%
+		<a href="#" class="level8">80-90%</a>80-90%
 		</td><tr>
 		<tr><td>
-		<a href="#" class="level7">asas</a>70-80%
+		<a href="#" class="level7">70-80%</a>70-80%
 		</td><tr>
 		<tr><td>
-		<a href="#" class="level6">asas</a>60-70%
+		<a href="#" class="level6">60-70%</a>60-70%
 		</td><tr>
 		<tr><td>
-		<a href="#" class="level5">asas</a>50-60%
+		<a href="#" class="level5">50-60%</a>50-60%
 		</td><tr>
 		<tr><td>
-		<a href="#" class="level4">asas</a>40-50%
+		<a href="#" class="level4">40-50%</a>40-50%
 		</td><tr>
 		<tr><td>
-		<a href="#" class="level3">asas</a>30-40%
+		<a href="#" class="level3">30-40%</a>30-40%
 		</td><tr>
 		<tr><td>
-		<a href="#" class="level2">asas</a>20-30%
+		<a href="#" class="level2">20-30%</a>20-30%
 		</td><tr>
 		<tr><td>
-		<a href="#" class="level1">asas</a>10-20%
+		<a href="#" class="level1">10-20%</a>10-20%
 		</td><tr>
 		<tr><td>
-		<a href="#" class="level0">asas</a>0-10%
+		<a href="#" class="level0">0-10%</a>0-10%
 		</td><tr>
 		</table>
-		<h3>Leyenda</h3>
+		<h3>'.get_string('legend', 'plagiarismdetector').'</h3>
 		</div>
 		<div class="wrapper bottom">
 		<div class="format">
