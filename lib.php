@@ -446,7 +446,7 @@ class plagiarismdetector_base {
 		$id = $this->assignment->id;
 
 		$mform = new plagiarismdetectorform($this->getPlugins());
-		$links = $this->get_links();
+		
 		if ($data=$mform->get_data()) {
 			$data->assignment = $this->assignment->id;
 			if (empty($this->plagiarism)) {
@@ -462,6 +462,7 @@ class plagiarismdetector_base {
 			if ($id) 
 				notify (get_string('editsave', 'plagiarismdetector'),'notifysuccess');
 			$this->plagiarism->id = $data->id;
+			$links = $this->get_links();
 			notice_yesno(get_string('confirmdetect', 'plagiarismdetector'),
 				$links["detect"],
 				$links["view"]);

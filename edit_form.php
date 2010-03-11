@@ -37,9 +37,9 @@ class plagiarismdetectorform extends moodleform {
 		$mform->setDefault('sensitivity', '60');
 	
 		/* Create the Autonotify selector */
-		$choices = array('0' => get_string('yes'),'1' => get_string('no'));
+		$choices = array('1' => get_string('yes'),'0' => get_string('no'));
 		$mform->addElement('select', 'autonotify', get_string('enableautonotify', 'plagiarismdetector'), $choices);
-		$mform->setDefault('autonotify', '0');
+		$mform->setDefault('autonotify', '1');
 
 
 		if ($action == 'create') 
