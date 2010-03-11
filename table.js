@@ -1,13 +1,4 @@
-/*
- * jQuery scrollsync Plugin
- * version: 1.0 (30 -Jun-2009)
- * Copyright (c) 2009 Miquel Herrera
- *
- * Dual licensed under the MIT and GPL licenses:
- *   http://www.opensource.org/licenses/mit-license.php
- *   http://www.gnu.org/licenses/gpl.html
- *
- */
+
 ;(function($){ // secure $ jQuery alias
 
 /**
@@ -143,7 +134,8 @@ $.fn.dragscrollable = function( options ){
 		{   
 			dragSelector:'>:first',
 			acceptPropagatedEvent: true,
-            preventDefault: true
+            preventDefault: true,
+            		scroll:'xy'
 		},options || {});
 	 
 	
@@ -173,11 +165,14 @@ $.fn.dragscrollable = function( options ){
 						 top: (event.clientY - event.data.lastCoord.top)};
 			
 			// Set the scroll position relative to what ever the scroll is now
+			if (event.data.scroll.indexOf("x")!=-1) {
 			event.data.scrollable.scrollLeft(
 							event.data.scrollable.scrollLeft() - delta.left);
+			}
+			if (event.data.scroll.indexOf("y")!=-1) {
 			event.data.scrollable.scrollTop(
 							event.data.scrollable.scrollTop() - delta.top);
-			
+			}
 			// Save where the cursor is
 			event.data.lastCoord={left: event.clientX, top: event.clientY}
 			if (event.data.preventDefault) {
@@ -201,7 +196,7 @@ $.fn.dragscrollable = function( options ){
 		// closure object data for each scrollable element
 		var data = {scrollable : $(this),
 					acceptPropagatedEvent : settings.acceptPropagatedEvent,
-                    preventDefault : settings.preventDefault }
+                    preventDefault : settings.preventDefault,scroll : settings.scroll }
 		// Set mouse initiating event on the desired descendant
 		$(this).find(settings.dragSelector).
 						bind('mousedown', data, dragscroll.mouseDownHandler);
@@ -212,77 +207,56 @@ $.fn.dragscrollable = function( options ){
 })( jQuery ); // confine scope
 
 $(document).ready(function() {
-		var top = $('.wrapper .topr .rowcol span').max($.max.innerWidth)+10;
-		var left = $('.wrapper .left .row span').max($.max.innerWidth)+40;
-		var width = $('.wrapper .content>div').innerWidth(true);
-		var height = $('.wrapper .content>div').innerHeight(true);
-		width=width>500?500:width;
-		height=height>400?400:height;
-		//
-		top = left;
-	$('.wrapper').css({paddingBottom: top,paddingLeft: left,width:width+10,height:height+10});	
-	
-	$('.wrapper .topr').css({/*marginTop:-top,*/height: top-5});
-	$('.wrapper .left').css({marginLeft:-left+5,width: left-5});
-	
-	$('.wrapper .content').dragscrollable({acceptPropagatedEvent: true});
-	$('.wrapper .left, .wrapper .topr').dragscrollable({acceptPropagatedEvent: true});
-	$('.wrapper .content, .wrapper .left').scrollsync({axis : 'y'});
-	$('.wrapper .content, .wrapper .topr').scrollsync({axis : 'x'});
-	$(".wrapper .content").hover(function() {
-		$('.wrapper .left span, .wrapper .topr span').animate({opacity:0.5},200);
-	},function() {
-		$('.wrapper .left span, .wrapper .topr span').animate({opacity:1},200);
+	var	m=17,
+		wrapper = $('.wrapper'),
+		content = $('.wrapper.content'),
+		left =  $('.wrapper.left'),
+		bottom =  $('.wrapper.bottom'),
+		content_w = content.innerWidth(true),
+		content_h = content.innerHeight(true);
+	content.dragscrollable({acceptPropagatedEvent: true});
+	left.dragscrollable({acceptPropagatedEvent: true,scroll:'y'});
+	var	bottom_table = bottom.find('table'),
+		bottom_w = bottom_table.width(),
+		bottom_h = bottom_table.height();
+	var	left_table = left.find('table'),
+		left_w = left_table.width(),
+		left_h = left_table.height();
+	bottom.dragscrollable({acceptPropagatedEvent: true,scroll:'x'}).css({marginLeft:bottom_w+m+2});
+	bottom.width(content_w).find('.format').height(bottom_w+m).width(bottom_h);
+	left.height(content_h).find('table').width(left_w+m);
+	content.hover(function() {
+		bottom.find('td').stop().animate({opacity:0.5},100);
+		left.find('td').stop().animate({opacity:0.5},100);
+	},
+	function() {
+		bottom.find('td').removeClass('over').stop().animate({opacity:1},100);
+		left.find('td').removeClass('over').stop().animate({opacity:1},100);
+		$(".wrapper.legend table td").removeClass('over');
 	});
-	
-	$(".wrapper .content .rowcol").hover( function(){
-		var col = $(this).parent().find(".rowcol").index(this);
-		var a = $(this).find('a').attr('class');
-		a = a.match(/scale[0-9]/gi)
-		$(".wrapper .mapping a[class="+a+"]").parent().find('span').addClass('over');
-		var row = $(".wrapper .content .row").index($(this).parent());
+	function getCol (elem) {
+		return $(elem).parent().find('td').index(elem);
+	}
+	function getRow (elem) {
+		return content.find('tr').index($(elem).parent());
+	}		
+	content.find('td').hover(function() {
+		var col = getCol(this);
+		var row = getRow(this);
+		bottom.find('tr').eq(col).find('td').addClass('over');
+		left.find('tr').eq(row).find('td').addClass('over');
 		
-		$('.wrapper .left .row').eq(row).find('span').addClass('over');
-
-		
-		$('.wrapper .topr .rowcol').eq(col).find('span').addClass('over');
-		//$(this).find("span").addClass('over');
-		//alert(col+"-"+row);
-	},function () {
-		$(".wrapper .mapping span").removeClass('over');
-		$('.wrapper .left .row span, .wrapper .topr .rowcol span').removeClass('over');
-	}).find('a').bind('mousedown',function() {
-		if ($('.prewrapper').is('.editable')) {
-			var title =  $(this).attr('title');
-			$('.wrapper .content .rowcol a[title="'+title+'"]').toggleClass('confirmed');
-		}
-	}).click(function(){/*if ($('.prewrapper').is('.editable'))*/ return false;});
-	$('.prewrapper button.edit').click(function()  {
-		$('.prewrapper').addClass('editable');
-		return false;
+		var level = $(this).find('a').attr('class');
+		level = level.match(/level[0-9]/gi)
+		$(".wrapper.legend table td a[class="+level+"]").parent().addClass('over');
+	},
+	function() {
+		var col = getCol(this);
+		var row = getRow(this);
+		bottom.find('tr').eq(col).find('td').removeClass('over');
+		left.find('tr').eq(row).find('td').removeClass('over');
+		$(".wrapper.legend table td").removeClass('over');
 	});
-
-	 //alert($(".wrapper .content .rowcol a.confirmed").size());
-	 
-	 $('.prewrapper button.save').click(function()  {
-			var confirmed=[];
-			var title;
-			 $(".wrapper .content .rowcol a.confirmed").each(function() {
-				 title = $(this).attr('title');
-				 //alert($.inArray(title, confirmed));
-				 if ($.inArray(title, confirmed) == -1) {
-					 //alert('a');
-					 confirmed.push(title);
-				 }
-				//alert();
-				//confirmed += $(o).id(); 
-			 });
-			 $('.prewrapper input[name="confirmed"]').val(confirmed.join(','));
-			 //alert(confirmed.join(','));
-		$('.prewrapper').removeClass('editable');
-		
-		$('#plagiarismsave').submit();
-		return false;
-	});
-	});
-
+	$('.wrapper.content, .wrapper.left').scrollsync({axis : 'y'});
+	$('.wrapper.content, .wrapper.bottom').scrollsync({axis : 'x'});
+  });

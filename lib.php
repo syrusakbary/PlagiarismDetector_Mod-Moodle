@@ -185,9 +185,7 @@ class plagiarismdetector_base {
 		);
 	}
 	
-
 	function view() {
-		
 		$this->print_view("view");
 		
 		$total = $this->totalPlagiarismsSimilarities($this->plagiarism->id);
@@ -202,10 +200,11 @@ class plagiarismdetector_base {
 			$confirmedarr = explode(',',optional_param("confirmed"));
 			$this->setConfirmedPlagiarismSimilarities($this->plagiarism->id,$confirmedarr);
 		}
-		echo get_string('plagiarismsdetected','plagiarismdetector').': <b>'.$this->confirmedPlagiarismsSimilarities($this->plagiarism->id).'</b>';
-		echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>';
-		echo "<script type=\"text/javascript\" src=\"{$this->cfg->wwwroot}/mod/plagiarismdetector/grid.js\" charset=\"utf-8\"></script>";
-		echo ' <style type="text/css">@import "'.$this->cfg->wwwroot.'/mod/plagiarismdetector/grid.css";</style> ';
+		echo get_string('plagiarismsdetected','plagiarismdetector').': <b>'.$this->confirmedPlagiarismsSimilarities($this->plagiarism->id).'</b><br>';
+		echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript"></script>';
+		echo "<script type=\"text/javascript\" src=\"{$this->cfg->wwwroot}/mod/plagiarismdetector/table.js\" charset=\"utf-8\"></script>";
+		echo '<link rel="stylesheet" type="text/css" href="'.$this->cfg->wwwroot.'/mod/plagiarismdetector/table.css" /> ';
+		//echo ' <style type="text/css">@import "'.$this->cfg->wwwroot.'/mod/plagiarismdetector/table.css";</style> ';
 		$simdata = ($this->plagiarismSimilarities($this->plagiarism->id));
 		$strcols = array();
 		$strrows = array();
@@ -213,9 +212,9 @@ class plagiarismdetector_base {
 		foreach ($simdata->users as $simuser) {
 			$name = $simuser->firstname.' '.$simuser->lastname;
 			$id1 = $simuser->id;
-			$strrows[] = '<div class="row"><span>'.$name.'</span></div>';
-			$strcols[] = '<div class="rowcol"><span>'.$name.'</span></div>';
-			$data[] = '<div class="row nobreak">';
+			$strrows[] = "<tr>\n<td>".$name."</td>\n</tr>\n";
+			$strcols[] = "<tr>\n<td>".$name."</td>\n</tr>\n";
+			$data[] = "<tr>\n";
 			foreach ($simdata->users as $simuser2) {
 				if ($simuser2 != $simuser) {
 					$id2 = $simuser2->id;
@@ -224,48 +223,62 @@ class plagiarismdetector_base {
 					$confirmed = $datss->confirmed;
 					$punct = $similarity;
 					$scale = $this->getScale($similarity);
-					$data[] = '<div class="rowcol"><a href="" title="'.$datss->id.'" class="scale'.($scale?$scale:'0').' '.($confirmed?"confirmed":"").'">Marcar</a></div>';
+					$data[] = '<td><a href="" title="'.$datss->id.'" class="level'.($scale?$scale:'0').' '.($confirmed?"confirmed":"").'">Marcar</a></td>'."\n";
 				}
 				else {
-					$punct = 'Own';$similarity=1;$confirmed=false;$data[] = '<div class="rowcol"><a class="scaleown">&nbsp;</a></div>';
+					$punct = 'Own';$similarity=1;$confirmed=false;$data[] = '<td><a class="level">&nbsp;</a></td>';
 				}
 			}
-			$data[] = '</div>';
+			$data[] = "\n</tr>";
 		}
-		echo '<div class="prewrapper">
-		<div class="wrapper">
-		<div class="mapping">
-		<h4>'.get_string('legend','plagiarismdetector').'</h4>
-		<div class="row"><a class="scale9">Scale</a><span>90%-100%</span></div>
-		<div class="row"><a class="scale8">Scale</a><span>80%-90%</span></div>
-		<div class="row"><a class="scale7">Scale</a><span>70%-80%</span></div>
-		<div class="row"><a class="scale6">Scale</a><span>60%-70%</span></div>
-		<div class="row"><a class="scale5">Scale</a><span>50%-60%</span></div>
-		<div class="row"><a class="scale4">Scale</a><span>40%-50%</span></div>
-		<div class="row"><a class="scale3">Scale</a><span>30%-40%</span></div>
-		<div class="row"><a class="scale2">Scale</a><span>20%-30%</span></div>
-		<div class="row"><a class="scale1">Scale</a><span>10%-20%</span></div>
-		<div class="row"><a class="scale0">Scale</a><span>0%-10%</span></div>
+		echo "\n".'<div class="prewrapper">
 		</div>
-		<div class="left">
-		<div style="position:relative;width:100%;">
-		'.implode('',$strrows).'
+		<div class="wrapper left">
+		<table cellspacing="5">'.join($strrows,'').'</table>
 		</div>
+		<div class="wrapper content">
+		<table cellspacing="5">'.join($data,'').'</table>
 		</div>
-		<div class="content">
-
-		<div style="white-space:nowrap;display:inline-block;">
-		'.implode('',$data).'
+		<div class="wrapper legend">
+		<table cellspacing="5">
+		<tr><td>
+		<a href="#" class="level9">90-100%</a>90-100%
+		</td><tr>
+		<tr><td>
+		<a href="#" class="level8">asas</a>80-90%
+		</td><tr>
+		<tr><td>
+		<a href="#" class="level7">asas</a>70-80%
+		</td><tr>
+		<tr><td>
+		<a href="#" class="level6">asas</a>60-70%
+		</td><tr>
+		<tr><td>
+		<a href="#" class="level5">asas</a>50-60%
+		</td><tr>
+		<tr><td>
+		<a href="#" class="level4">asas</a>40-50%
+		</td><tr>
+		<tr><td>
+		<a href="#" class="level3">asas</a>30-40%
+		</td><tr>
+		<tr><td>
+		<a href="#" class="level2">asas</a>20-30%
+		</td><tr>
+		<tr><td>
+		<a href="#" class="level1">asas</a>10-20%
+		</td><tr>
+		<tr><td>
+		<a href="#" class="level0">asas</a>0-10%
+		</td><tr>
+		</table>
+		<h3>Leyenda</h3>
 		</div>
+		<div class="wrapper bottom">
+		<div class="format">
+		<table cellspacing="5">'.join($strcols,'').'</table>
 		</div>
-		<div class="topr">
-		<div style="position:relative;height:100%;" class="nobreak">
-		'.implode('',$strcols).'
-		</div>
-		</div>
-
-		</div><form id="plagiarismsave" method="POST" action="'.$this->cfg->wwwroot.'/mod/plagiarismdetector/view.php"><input type="hidden" name="confirmed" value=""><input type="hidden" name="id" value="'.$this->plagiarism->id.'"><button class="edit">'.get_string('edit').'</button><button class="save">'.get_string('save').'</button></form></div>';
-		
+		<div class="clear"></div></div>';	
 		/* Top Plagiarism section */
 		echo "<h4>".get_string('topplagiarismusers','plagiarismdetector')."</h4>";
 		
@@ -287,6 +300,7 @@ class plagiarismdetector_base {
 
 		$this->print_footer();
 	}
+
 	function edit () {
 		$this->print_view('edit');
 		$this->print_edit();
