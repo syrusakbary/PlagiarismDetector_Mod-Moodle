@@ -222,7 +222,7 @@ $(document).ready(function() {
 	var	left_table = left.find('table'),
 		left_w = left_table.width(),
 		left_h = left_table.height();
-	bottom.dragscrollable({acceptPropagatedEvent: true,scroll:'x'}).css({marginLeft:bottom_w+m+2});
+	bottom.dragscrollable({acceptPropagatedEvent: true,scroll:'x'}).css({marginLeft:bottom_w+m+1});
 	bottom.width(content_w).find('.format').height(bottom_w+m).width(bottom_h);
 	left.height(content_h).find('table').width(left_w+m);
 	content.hover(function() {

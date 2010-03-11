@@ -56,12 +56,12 @@ margin:0 auto;
     .wrapper {
 
 	  font-size:16px;
-  border:2px solid #CCC;
+  border:1px solid #999;
   background:#EEE;
    }
    .wrapper.content {
-border-left:2px solid #DDD;
-border-bottom:2px solid #DDD;
+border-left:1px solid #DDD;
+border-bottom:1px solid #DDD;
   overflow:auto;
   max-width:600px;
   max-height:400px;
