@@ -333,7 +333,7 @@ class plagiarismdetector_base {
 					$pdir = $plagiarismdetectordir."/".$file;
 					if ($file != "." && $file != ".." && is_dir($adir)) {
 						echo "Creating directory for user {$file}:";
-						mkdir ($pdir,NULL,true);
+						mkdir ($pdir,0777,true);
 						//echo 'cp '.$adir.'/* '.$pdir.'/';
 						//$msg = shell_exec('cp '.$adir.'/* '.$pdir.'/;');
 						//echo $msg;
