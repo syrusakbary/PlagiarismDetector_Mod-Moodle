@@ -359,7 +359,6 @@ class plagiarismdetector_base {
 			$finaldir = $assignmentdir;
 		}
 		$results = $judger->compareDir($finaldir)->getResults();
-		var_dump($results);
 		foreach ($results as $result) {
 			$data_similarity = new stdClass();
 			$data_similarity->user1 = (string)$result['users'][0];
