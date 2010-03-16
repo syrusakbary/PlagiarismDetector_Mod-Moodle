@@ -1,6 +1,6 @@
 <?php  // $Id: view.php,v 1.42 2007/08/17 12:15:33 skodak Exp $
 
-	require_once("../../config.php");
+	require_once(dirname($_SERVER['SCRIPT_FILENAME']).DIRECTORY_SEPARATOR."../../config.php");
 	require_once("lib.php");
 
 	$id = optional_param('id', 0, PARAM_INT);  // Course Module ID
