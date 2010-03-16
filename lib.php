@@ -326,6 +326,7 @@ class plagiarismdetector_base {
 		
 		if ($this->cfg->plagiarismdetector_enableunpack) {
 			$plagiarismdetectordir = $this->cfg->dataroot.'/'. $this->course->id.'/moddata/plagiarismdetector/'.$this->assignment->id;
+			shell_exec('rm -rf '.$plagiarismdetectordir);
 			echo "<br>[PlagiarismDetector directory: {$plagiarismdetectordir}]<br>";
 			if ($dh = opendir($assignmentdir)) {
 				while (($file = readdir($dh)) !== false) {
