@@ -342,7 +342,7 @@ class plagiarismdetector_base {
 						echo "&nbsp;&nbsp;Copying & Unpacking files...";
 						flush();
 						ob_flush();
-						/*$msg2 = */shell_exec('cp '.$adir.'/* '.$pdir.'/; cd '.$pdir.'; for i in *.zip; do unzip $i; rm $i; done; for i in *.tar.gz; do tar -xzvf $i; rm $i; done;');
+						/*$msg2 = */shell_exec('cp '.$adir.'/* '.$pdir.'/; cd '.$pdir.'; for i in *.zip; do unzip $i; rm $i; done; for i in *.tar.gz; do tar -xzvf $i; rm $i; done; for i in *.tar; do tar -xvf $i; rm $i; done; for i in *.tar.bz2; do tar -jxvf $i; rm $i; done; ');
 						echo "FINISHED<br>";
 						flush();
 						ob_flush();
