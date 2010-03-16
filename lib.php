@@ -292,7 +292,7 @@ class plagiarismdetector_base {
 
 		foreach ($allPlagiarisms as $plag) {
 			$table->data[] = array(
-				ucfirst($plag->firstname)." ".ucfirst($plag->lasttname),
+				ucfirst($plag->firstname)." ".ucfirst($plag->lastname),
 				"{$plag->num}"
 			);
 		}
