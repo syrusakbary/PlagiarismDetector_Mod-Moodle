@@ -272,7 +272,7 @@ $(document).ready(function() {
 		plags.eq(0).html(user1);
 		plags.eq(1).html(user2);
 		info.find('span.similarity').html(similarity);
-	});
+	}).click(function() {return false;});
 	$('.wrapper.content, .wrapper.left').scrollsync({axis : 'y'});
 	$('.wrapper.content, .wrapper.bottom').scrollsync({axis : 'x'});
   });
