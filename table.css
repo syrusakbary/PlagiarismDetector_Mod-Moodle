@@ -1,19 +1,22 @@
 .prewrapper {
-width:900px!important;
-display:block;
+display:inline-block;
+position:relative;
 margin:0 auto;
 	}
   .wrapper.left {
+  		position:absolute;
+		right:100%;
+		margin-right:10px;
 	  overflow:hidden;
-	  float:left;
-	  border-right:none;
-	  max-height:400px;
+	  max-height:480px;
   }
   .wrapper.legend {
-	  float:right;
+	  position:absolute;
+	  right:-183px;
 	  margin:0 10px;
-	  width:140px;
-	  position:relative;
+	  width:150px;
+	  padding:5px;
+	  text-align:left;
   }
    .wrapper.legend table td {
   font-size:16px;
@@ -34,14 +37,17 @@ margin:0 auto;
   bottom:-45px;
   }
     .wrapper.bottom {
-	  clear:left;
+	 	position:absolute;
+		top:100%;
+		right:0;
+		margin-top:10px;
 	  overflow:hidden;
-	  border-top:none;
-	  max-width:600px;
+	  max-width:640px;
 	  }
   .wrapper.bottom div.format{
 	overflow:none;
 	display:block;
+	text-align:left;
   }
     .wrapper.bottom table {
   -webkit-transform-origin: top left;
@@ -58,15 +64,13 @@ margin:0 auto;
     .wrapper {
 
 	  font-size:16px;
-  border:1px solid #999;
+  border:2px solid #CCC;
   background:#EEE;
    }
    .wrapper.content {
-border-left:1px solid #DDD;
-border-bottom:1px solid #DDD;
   overflow:auto;
-  max-width:600px;
-  max-height:400px;
+  max-width:640px;
+  max-height:480px;
   float:left;
   }
   .wrapper table {

@@ -224,6 +224,7 @@ $(document).ready(function() {
 		left_h = left_table.height();
 	bottom.dragscrollable({acceptPropagatedEvent: true,scroll:'x'}).css({marginLeft:bottom_w+m+1});
 	bottom.width(content_w).find('.format').height(bottom_w+m).width(bottom_h);
+	$('.prewrapper').css({marginBottom:bottom_w});
 	left.height(content_h).find('table').width(left_w+m);
 	content.hover(function() {
 		bottom.find('td').stop().animate({opacity:0.5},100);

@@ -231,15 +231,16 @@ class plagiarismdetector_base {
 			}
 			$data[] = "\n</tr>";
 		}
-		echo "\n".'<div class="prewrapper">
-		</div>
+		echo "\n".'<center><div class="prewrapper">
+		';
+		echo'
 		<div class="wrapper left">
 		<table cellspacing="5">'.join($strrows,'').'</table>
-		</div>
-		<div class="wrapper content">
+		</div>';
+		echo'<div class="wrapper content">
 		<table cellspacing="5">'.join($data,'').'</table>
-		</div>
-		<div class="wrapper legend">
+		</div>';
+		echo'<div class="wrapper legend">
 		<table cellspacing="5">
 		<tr><td>
 		<a href="#" class="level9">90-100%</a>90-100%
@@ -273,13 +274,14 @@ class plagiarismdetector_base {
 		</td><tr>
 		</table>
 		<h3>'.get_string('legend', 'plagiarismdetector').'</h3>
-		</div>
-		<div class="wrapper bottom">
+		</div>';
+		echo'<div class="wrapper bottom">
 		<div class="format">
 		<table cellspacing="5">'.join($strcols,'').'</table>
 		</div>
-		<div class="clear"></div></div>';	
+		<div class="clear"></div>';
 		/* Top Plagiarism section */
+		echo '</div></center><div class="clear">';
 		echo "<h4>".get_string('topplagiarismusers','plagiarismdetector')."</h4>";
 		
 		$table->head  = array (get_string('user'), get_string('plagiarismsdetected', 'plagiarismdetector'));
