@@ -212,6 +212,7 @@ $(document).ready(function() {
 		content = $('.wrapper.content'),
 		left =  $('.wrapper.left'),
 		bottom =  $('.wrapper.bottom'),
+		info = $('.wrapper.info'),
 		content_w = content.innerWidth(true),
 		content_h = content.innerHeight(true);
 	content.dragscrollable({acceptPropagatedEvent: true});
@@ -226,14 +227,17 @@ $(document).ready(function() {
 	bottom.width(content_w).find('.format').height(bottom_w+m).width(bottom_h);
 	$('.prewrapper').css({marginBottom:bottom_w});
 	left.height(content_h).find('table').width(left_w+m);
+	info.hide();
 	content.hover(function() {
 		bottom.find('td').stop().animate({opacity:0.5},100);
 		left.find('td').stop().animate({opacity:0.5},100);
+		info.show();
 	},
 	function() {
 		bottom.find('td').removeClass('over').stop().animate({opacity:1},100);
 		left.find('td').removeClass('over').stop().animate({opacity:1},100);
 		$(".wrapper.legend table td").removeClass('over');
+		info.hide();
 	});
 	function getCol (elem) {
 		return $(elem).parent().find('td').index(elem);
@@ -257,6 +261,17 @@ $(document).ready(function() {
 		bottom.find('tr').eq(col).find('td').removeClass('over');
 		left.find('tr').eq(row).find('td').removeClass('over');
 		$(".wrapper.legend table td").removeClass('over');
+	});
+	
+	$('.wrapper.content table td a').live('mouseover',function(event) {
+		var data = $(this).attr('title').split('_');
+		var user1=data[0],
+		user2=data[1],
+		similarity=data[2];
+		var plags = info.find('ul.name li');
+		plags.eq(0).html(user1);
+		plags.eq(1).html(user2);
+		info.find('span.similarity').html(similarity);
 	});
 	$('.wrapper.content, .wrapper.left').scrollsync({axis : 'y'});
 	$('.wrapper.content, .wrapper.bottom').scrollsync({axis : 'x'});

@@ -1,7 +1,7 @@
 .prewrapper {
 display:inline-block;
 position:relative;
-margin:0 auto;
+margin:10px auto;
 	}
   .wrapper.left {
   		position:absolute;
@@ -12,11 +12,28 @@ margin:0 auto;
   }
   .wrapper.legend {
 	  position:absolute;
+	  top:0;
 	  right:-183px;
 	  margin:0 10px;
 	  width:150px;
 	  padding:5px;
 	  text-align:left;
+  }
+  .wrapper.info {
+  	position:absolute;
+	top:0;
+	min-width:200px;
+	right:100%;
+	margin-right:10px;
+	/*display:block;
+	margin-top:10px;*/
+	text-align:left;
+	padding:5px;
+  }
+  .wrapper.info b {
+  	clear:left;
+	float:left;
+	margin-right:10px;
   }
    .wrapper.legend table td {
   font-size:16px;
@@ -71,7 +88,6 @@ margin:0 auto;
   overflow:auto;
   max-width:640px;
   max-height:480px;
-  float:left;
   }
   .wrapper table {
   table-layout:fixed;

@@ -211,19 +211,21 @@ class plagiarismdetector_base {
 		$data = array();
 		foreach ($simdata->users as $simuser) {
 			$name = $simuser->firstname.' '.$simuser->lastname;
+			
 			$id1 = $simuser->id;
 			$strrows[] = "<tr>\n<td>".$name."</td>\n</tr>\n";
 			$strcols[] = "<tr>\n<td>".$name."</td>\n</tr>\n";
 			$data[] = "<tr>\n";
 			foreach ($simdata->users as $simuser2) {
 				if ($simuser2 != $simuser) {
+					$name2 = $simuser2->firstname.' '.$simuser2->lastname;
 					$id2 = $simuser2->id;
 					$datss =  $simdata->similarities[$id1][$id2];
 					$similarity = $datss->similarity;
 					$confirmed = $datss->confirmed;
 					$punct = $similarity;
 					$scale = $this->getScale($similarity);
-					$data[] = '<td><a href="" title="'.$datss->id.'" class="level'.($scale?$scale:'0').' '.($confirmed?"confirmed":"").'">Marcar</a></td>'."\n";
+					$data[] = '<td><a href="" title="'.$name.'_'.$name2.'_'.$similarity.'"id="'.$datss->id.'" class="level'.($scale?$scale:'0').' '.($confirmed?"confirmed":"").'">Marcar</a></td>'."\n";
 				}
 				else {
 					$punct = 'Own';$similarity=1;$confirmed=false;$data[] = '<td><a class="level">&nbsp;</a></td>';
@@ -233,12 +235,16 @@ class plagiarismdetector_base {
 		}
 		echo "\n".'<center><div class="prewrapper">
 		';
-		echo'
+		/*echo'
 		<div class="wrapper left">
 		<table cellspacing="5">'.join($strrows,'').'</table>
-		</div>';
+		</div>';*/
 		echo'<div class="wrapper content">
 		<table cellspacing="5">'.join($data,'').'</table>
+		</div>';
+		echo'<div class="wrapper info">
+			<b>Plagiadores</b><br><ul class="name"><li><span>asdfasdf</span></li><li><span>asdfasdf</span></li></ul>
+			<b>Similitud</b><span class="similarity">0.5</span>
 		</div>';
 		echo'<div class="wrapper legend">
 		<table cellspacing="5">
@@ -275,11 +281,11 @@ class plagiarismdetector_base {
 		</table>
 		<h3>'.get_string('legend', 'plagiarismdetector').'</h3>
 		</div>';
-		echo'<div class="wrapper bottom">
+		/*echo'<div class="wrapper bottom">
 		<div class="format">
 		<table cellspacing="5">'.join($strcols,'').'</table>
 		</div>
-		<div class="clear"></div>';
+		<div class="clear"></div>';*/
 		/* Top Plagiarism section */
 		echo '</div></center><div class="clear">';
 		echo "<h4>".get_string('topplagiarismusers','plagiarismdetector')."</h4>";
