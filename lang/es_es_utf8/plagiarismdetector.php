@@ -19,6 +19,7 @@ $string['delete'] = 'Borrar detector';
 $string['plagiarismsdetected'] = 'Plagios detectados';
 $string['plugin'] = 'Plugin';
 $string['language'] = 'Idioma';
+$string['similarity'] = 'Similitud';
 $string['sensitivity'] = 'Sensibilidad';
 $string['view'] = 'Informes';
 $string['detect'] = 'Detectar plagios';

@@ -225,7 +225,7 @@ class plagiarismdetector_base {
 					$confirmed = $datss->confirmed;
 					$punct = $similarity;
 					$scale = $this->getScale($similarity);
-					$data[] = '<td><a href="" title="'.$name.'_'.$name2.'_'.$similarity.'"id="'.$datss->id.'" class="level'.($scale?$scale:'0').' '.($confirmed?"confirmed":"").'">Marcar</a></td>'."\n";
+					$data[] = '<td><a href="" title="'.$name.'_'.$name2.'_'.round($similarity*100,2).'%"id="'.$datss->id.'" class="level'.($scale?$scale:'0').' '.($confirmed?"confirmed":"").'">Marcar</a></td>'."\n";
 				}
 				else {
 					$punct = 'Own';$similarity=1;$confirmed=false;$data[] = '<td><a class="level">&nbsp;</a></td>';
@@ -243,8 +243,8 @@ class plagiarismdetector_base {
 		<table cellspacing="5">'.join($data,'').'</table>
 		</div>';
 		echo'<div class="wrapper info">
-			<b>Plagiadores</b><br><ul class="name"><li><span>asdfasdf</span></li><li><span>asdfasdf</span></li></ul>
-			<b>Similitud</b><span class="similarity">0.5</span>
+			<b>'.get_string('students').'</b><br><ul class="name"><li><span>asdfasdf</span></li><li><span>asdfasdf</span></li></ul>
+			<b>'.get_string('similarity','plagiarismdetector').'</b><span class="similarity">0.5</span>
 		</div>';
 		echo'<div class="wrapper legend">
 		<table cellspacing="5">
