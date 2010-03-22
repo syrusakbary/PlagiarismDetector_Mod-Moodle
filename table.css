@@ -91,11 +91,11 @@ margin:10px auto;
   }
   .wrapper table {
   table-layout:fixed;
-border-spacing: 0px; border-collapse: separate;
+border-spacing: 2px; border-collapse: separate;
   }
   .wrapper table td {
-  min-width:25px;
-  height:25px;
+  min-width:22px;
+  height:22px;
   padding:0px;
   }
   .wrapper table td.over {
@@ -130,28 +130,28 @@ border:2px solid rgba(0,0,255,0.8);
 
 .wrapper table a.level0 {
 background:#246D07;
-width:13px;
-height:13px;
-}
-.wrapper a.level1 {
-background:#5C7812;
-width:14px;
-height:14px;
-}
-.wrapper a.level2 {
-background:#7B7E18;
-width:15px;
-height:15px;
-}
-.wrapper a.level3 {
-background:#A98822;
 width:16px;
 height:16px;
 }
-.wrapper a.level4 {
-background:#D3902A;
+.wrapper a.level1 {
+background:#5C7812;
+width:16px;
+height:16px;
+}
+.wrapper a.level2 {
+background:#7B7E18;
 width:17px;
 height:17px;
+}
+.wrapper a.level3 {
+background:#A98822;
+width:17px;
+height:17px;
+}
+.wrapper a.level4 {
+background:#D3902A;
+width:18px;
+height:18px;
 }
 .wrapper a.level5 {
 background:#EF8B2C;
@@ -165,18 +165,18 @@ height:19px;
 }
 .wrapper a.level7 {
 background:#DC3E14;
-width:20px;
-height:20px;
+width:19px;
+height:19px;
 }
 .wrapper a.level8 {
 background:#D6270C;
-width:22px;
-height:22px;
+width:20px;
+height:20px;
 }
 .wrapper a.level9 {
 background:#CC0000;
-width:23px;
-height:23px;
+width:20px;
+height:20px;
 }
  .wrapper table a:hover {
 -webkit-transform: scale(1.5);
