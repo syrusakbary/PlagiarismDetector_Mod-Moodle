@@ -91,7 +91,7 @@ margin:10px auto;
   }
   .wrapper table {
   table-layout:fixed;
-border-spacing: 1px; border-collapse: separate;
+border-spacing: 0px; border-collapse: separate;
   }
   .wrapper table td {
   min-width:25px;
