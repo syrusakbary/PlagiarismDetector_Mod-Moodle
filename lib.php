@@ -293,10 +293,10 @@ class plagiarismdetector_base {
 		$table->head  = array (get_string('user'), get_string('plagiarismsdetected', 'plagiarismdetector'));
 		$table->align = array ("left", "center");
 		
-		$sql = 'SELECT firstname,lastname,u,sum(c) as num from ((SELECT user1 as u,count(*) as c FROM `mdl_plagiarismdetector_similarities` where confirmed=1 Group by user1 order by c desc) UNION 
-		(SELECT user2 as u,count(*) as c FROM `mdl_plagiarismdetector_similarities` where confirmed=1 Group by user2 order by c desc)) as s join mdl_user as us on u=us.id GROUP BY u ORDER BY c desc';
+		$sql = 'SELECT firstname,lastname,u,sum(c) as num from ((SELECT user1 as u,count(*) as c FROM `mdl_plagiarismdetector_similarities` where (confirmed=1 and plagiarismid='.$this->plagiarism->id.') Group by user1 order by c desc) UNION 
+		(SELECT user2 as u,count(*) as c FROM `mdl_plagiarismdetector_similarities` where (confirmed=1 and plagiarismid='.$this->plagiarism->id.') Group by user2 order by c desc)) as s join mdl_user as us on u=us.id GROUP BY u ORDER BY c desc';
 		$allPlagiarisms = get_records_sql($sql);
-		
+		//var_dump($sql);
 
 		foreach ($allPlagiarisms as $plag) {
 			$table->data[] = array(
